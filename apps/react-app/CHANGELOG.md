@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/cyberniinja/schediochron/compare/react-app@v0.1.1...react-app@v0.2.0) (2026-07-15)
+
+
+### Features
+
+* **#70:** extract Calendar, Layout, getWeekArray into @schediochron/react-components ([513a3e5](https://github.com/cyberniinja/schediochron/commit/513a3e51742eaaa5b49e0a03972229c66c582f06))
+
 ## [0.1.1](https://github.com/cyberniinja/schediochron/compare/schediochron@v0.1.0...schediochron@v0.1.1) (2026-03-24)
 
 ### Bug Fixes
