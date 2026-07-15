@@ -10,6 +10,9 @@
       "path": "./apps/react-app"
     },
     {
+      "path": "./packages/api"
+    },
+    {
       "path": "./packages/core"
     },
     {

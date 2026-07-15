@@ -1,0 +1,11 @@
+{
+  "name": "@schediochron/api",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./dist/main.js",
+  "dependencies": {
+    "hono": "^4.12.0",
+    "tslib": "^2.3.0"
+  }
+}

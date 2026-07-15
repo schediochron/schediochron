@@ -61,10 +61,21 @@
     "apps/react-app": {
       "name": "@schediochron/react-app",
       "version": "0.1.1",
+      "dependencies": {
+        "@schediochron/react-components": "*",
+      },
     },
     "apps/react-app-e2e": {
       "name": "@schediochron/react-app-e2e",
       "version": "0.0.1",
+    },
+    "packages/api": {
+      "name": "@schediochron/api",
+      "version": "0.0.1",
+      "dependencies": {
+        "hono": "^4.12.0",
+        "tslib": "^2.3.0",
+      },
     },
     "packages/core": {
       "name": "@schediochron/core",
@@ -77,6 +88,10 @@
     "packages/react-components": {
       "name": "@schediochron/react-components",
       "version": "0.0.1",
+      "peerDependencies": {
+        "@schediochron/core": "*",
+        "react": ">=18.0.0",
+      },
     },
   },
   "trustedDependencies": [
@@ -691,6 +706,8 @@
     "@rspack/lite-tapable": ["@rspack/lite-tapable@1.1.0", "", {}, "sha512-E2B0JhYFmVAwdDiG14+DW0Di4Ze4Jg10Pc4/lILUrd5DRCaklduz2OvJ5HYQ6G+hd+WTzqQb3QnDNfK4yvAFYw=="],
 
     "@rtsao/scc": ["@rtsao/scc@1.1.0", "", {}, "sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g=="],
+
+    "@schediochron/api": ["@schediochron/api@workspace:packages/api"],
 
     "@schediochron/core": ["@schediochron/core@workspace:packages/core"],
 
@@ -1439,6 +1456,8 @@
     "hermes-parser": ["hermes-parser@0.25.1", "", { "dependencies": { "hermes-estree": "0.25.1" } }, "sha512-6pEjquH3rqaI6cYAXYPcz9MS4rY6R4ngRgrgfDshRptUZIc3lw0MCIJIGDj9++mfySOuPTHB4nrSW99BCvOPIA=="],
 
     "homedir-polyfill": ["homedir-polyfill@1.0.3", "", { "dependencies": { "parse-passwd": "^1.0.0" } }, "sha512-eSmmWE5bZTK2Nou4g0AI3zZ9rswp7GRKoKXS1BLUkvPviOqs4YTN1djQIqrXy9k5gEtdLPy86JjRwsNM9tnDcA=="],
+
+    "hono": ["hono@4.12.30", "", {}, "sha512-emn+JoJjrN9YTpRDS5it/UI2SO9BAE37T6I3d963RxcZ81G9A4pr2SZTEiiaiKbzx+NKRg5BZ89fCL7gCJCUog=="],
 
     "html-encoding-sniffer": ["html-encoding-sniffer@6.0.0", "", { "dependencies": { "@exodus/bytes": "^1.6.0" } }, "sha512-CV9TW3Y3f8/wT0BRFc1/KAVQ3TUHiXmaAb6VW9vtiMFf7SLoMd1PdAc4W3KFOFETBJUb90KatHqlsZMWV+R9Gg=="],
 
