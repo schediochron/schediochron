@@ -18,6 +18,7 @@
     "target": "es2022",
     "customConditions": ["@schediochron/source"],
     "paths": {
+      "@schediochron/api": ["./packages/api/dist/index.d.ts"],
       "@schediochron/core": ["./packages/core/dist/index.d.ts"],
       "@schediochron/react-components": [
         "./packages/react-components/dist/index.d.ts"
