@@ -116,7 +116,9 @@ Make Schediochron discoverable and easy to adopt.
 
 **Version:** 0.1.x (prototype)
 
-The current codebase is a React UI prototype demonstrating the calendar-based time tracking interface. It has no data persistence or backend. It will be split into `@schediochron/react-components` (component library) and `@schediochron/react-app` (full application) in Phase 1.
+The monorepo is structured around the module architecture above. `@schediochron/core` holds the data models and repository interfaces; the React prototype has been split into `@schediochron/react-components` (the reusable calendar and layout components) and `@schediochron/react-app` (the web UI built on them); and `@schediochron/api` is scaffolded on Hono, serving a health check against the REST contract in `libs/api/openapi.yaml`.
+
+Phase 1 finishes by stubbing out the API's routes from that contract, then running the validation gate. Persistence and real request handling arrive in Phase 2, when `@schediochron/sql` implements the `core` repository interfaces and the API is wired to it.
 
 ---
 
