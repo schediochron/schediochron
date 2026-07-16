@@ -7,7 +7,9 @@
     "build": "bun build ./index.html --outdir dist --production",
     "preview": "bun ./preview.ts",
     "test": "bun test --preload ./happydom.ts --preload ./test-setup.ts",
-    "test:watch": "bun test --preload ./happydom.ts --preload ./test-setup.ts --watch"
+    "test:watch": "bun test --preload ./happydom.ts --preload ./test-setup.ts --watch",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@schediochron/react-components": "workspace:^"

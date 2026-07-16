@@ -17,8 +17,7 @@ Every app and lib is a self-contained package with its own `src/`.
 ```
 schediochron/
 ├── apps/
-│   ├── react-app/            # @schediochron/react-app — main React app
-│   └── react-app-e2e/        # @schediochron/react-app-e2e — Playwright E2E
+│   └── react-app/            # @schediochron/react-app — React app; e2e/ holds its Playwright specs
 ├── libs/
 │   ├── core/                 # @schediochron/core — domain models and types
 │   ├── react-components/     # @schediochron/react-components — shared UI
@@ -94,9 +93,11 @@ outputs, `exports`, or the layout of a package.
 - The React packages preload `happydom.ts` then `test-setup.ts`, in that order — Testing Library
   binds `screen` at import time and needs the DOM registered first.
 - No `console.error` or `console.warn` in production code.
-- Unit/integration tests: named `*.spec.ts(x)` or `*.test.ts(x)`, importing from `bun:test`,
-  Testing Library for components. E2E: Playwright in `apps/react-app-e2e/src/` — test user flows,
-  not implementation details.
+- The filename suffix picks the runner, so keep it accurate: `*.spec.ts(x)` are unit/integration
+  tests run by `bun test` (import from `bun:test`, Testing Library for components), and `*.e2e.ts`
+  are Playwright tests living in the app's `e2e/` folder. Name an e2e test `*.spec.ts` and
+  `bun test` will try to run it and fail.
+- E2E tests cover user flows, not implementation details.
 - Adding a workspace: create it under `apps/` or `libs/`, give it the scripts the root scripts
   expect (`build`, `test`, …), and add it to the `references` in `tsconfig.json`.
 

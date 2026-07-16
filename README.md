@@ -44,8 +44,7 @@ Schediochron is composed of independently usable packages:
 ```
 schediochron/
 ├── apps/
-│   ├── react-app/              # @schediochron/react-app — main React app
-│   └── react-app-e2e/          # Playwright E2E tests
+│   └── react-app/              # @schediochron/react-app — React app (e2e/ holds its E2E tests)
 ├── libs/
 │   ├── core/                   # @schediochron/core — domain models
 │   ├── react-components/       # @schediochron/react-components — shared UI

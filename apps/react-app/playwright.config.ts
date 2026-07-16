@@ -7,7 +7,10 @@ const baseURL = process.env['BASE_URL'] || 'http://localhost:4300';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './src',
+  testDir: './e2e',
+  // Unit tests are *.spec.*, e2e tests are *.e2e.* — the suffix is what keeps
+  // bun test and playwright out of each other's files.
+  testMatch: '**/*.e2e.ts',
   outputDir: './test-output/playwright/output',
   forbidOnly: !!process.env['CI'],
   retries: process.env['CI'] ? 2 : 0,
@@ -22,7 +25,6 @@ export default defineConfig({
   /* Previews the built app — run `bun run build` before `bun run e2e`. */
   webServer: {
     command: 'bun run preview',
-    cwd: '../react-app',
     url: 'http://localhost:4300',
     reuseExistingServer: !process.env['CI'],
   },

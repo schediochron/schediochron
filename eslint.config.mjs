@@ -7,8 +7,8 @@ import playwright from 'eslint-plugin-playwright';
 import prettier from 'eslint-config-prettier';
 
 const reactFiles = [
-  'apps/react-app/**/*.{ts,tsx,js,jsx}',
-  'libs/react-components/**/*.{ts,tsx,js,jsx}',
+  'apps/react-app/src/**/*.{ts,tsx,js,jsx}',
+  'libs/react-components/src/**/*.{ts,tsx,js,jsx}',
 ];
 
 export default [
@@ -41,7 +41,7 @@ export default [
     },
   },
   {
-    files: ['apps/react-app-e2e/**/*.{ts,js}'],
+    files: ['**/*.e2e.{ts,js}'],
     ...playwright.configs['flat/recommended'],
   },
   {

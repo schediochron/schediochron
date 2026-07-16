@@ -43,10 +43,6 @@
         "@schediochron/react-components": "workspace:^",
       },
     },
-    "apps/react-app-e2e": {
-      "name": "@schediochron/react-app-e2e",
-      "version": "0.0.1",
-    },
     "libs/api": {
       "name": "@schediochron/api",
       "version": "0.0.1",
@@ -172,8 +168,6 @@
     "@schediochron/core": ["@schediochron/core@workspace:libs/core"],
 
     "@schediochron/react-app": ["@schediochron/react-app@workspace:apps/react-app"],
-
-    "@schediochron/react-app-e2e": ["@schediochron/react-app-e2e@workspace:apps/react-app-e2e"],
 
     "@schediochron/react-components": ["@schediochron/react-components@workspace:libs/react-components"],
 
