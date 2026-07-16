@@ -5,7 +5,7 @@ import { resolve } from 'path';
 
 export default defineConfig(() => ({
   root: __dirname,
-  cacheDir: '../../node_modules/.vite/packages/react-components',
+  cacheDir: '../../node_modules/.vite/libs/react-components',
   plugins: [react()],
   build: {
     lib: {

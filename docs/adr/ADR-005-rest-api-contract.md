@@ -14,7 +14,8 @@ and status codes will diverge between the backend implementation and frontend in
 
 This ADR defines the design decisions for the REST API contract — versioning strategy,
 authentication scheme, error envelope, and endpoint conventions. The full contract is
-specified in `openapi.yaml` (OpenAPI 3.1) at the repository root. Implementers of
+specified in `openapi.yaml` (OpenAPI 3.1), alongside the API package in `libs/api/`.
+Implementers of
 `@schediochron/api` and consumers (`@schediochron/react-app`) should derive their work from
 that file.
 

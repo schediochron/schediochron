@@ -1,5 +1,6 @@
 # Add files here to ignore them from prettier formatting
-/dist
+dist
+out-tsc
+test-output
 /coverage
-/.nx/cache
-/.nx/workspace-data
+bun.lock

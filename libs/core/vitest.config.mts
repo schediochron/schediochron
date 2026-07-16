@@ -2,9 +2,9 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig(() => ({
   root: __dirname,
-  cacheDir: '../../node_modules/.vite/packages/api',
+  cacheDir: '../../node_modules/.vite/libs/core',
   test: {
-    name: '@schediochron/api',
+    name: '@schediochron/core',
     watch: false,
     globals: true,
     environment: 'node',

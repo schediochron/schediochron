@@ -12,7 +12,7 @@ Thank you for contributing! This guide covers the conventions and standards for 
 
 ```bash
 bun install
-bun nx serve schediochron
+bun run dev
 ```
 
 ### Secrets
@@ -35,13 +35,7 @@ This project uses FontAwesome Pro, which requires an auth token. Secrets are man
    direnv allow
    ```
 
-3. Copy `bunfig.toml.example` to `bunfig.toml` — it reads the token from the environment:
-
-   ```bash
-   cp bunfig.toml.example bunfig.toml
-   ```
-
-4. Install dependencies:
+3. Install dependencies:
    ```bash
    bun install
    ```
@@ -166,29 +160,20 @@ Types: `feat`, `fix`, `chore`, `refactor`, `docs`, `test`, `style`
 
 Example: `feat(#42): add profile component`
 
-## Versioning
+## Releases
 
-Tags follow monorepo-scoped semantic versioning:
-
-```
-schediochron@{major}.{minor}.{patch}
-```
-
-- **major** — breaking changes
-- **minor** — new features (backward-compatible)
-- **patch** — bug fixes, chores, refactoring
-
-Tagging is handled by CI/CD on merges to `main`.
+There is no release automation — the project is too early for it. Release notes are written by
+agents when a release is actually cut.
 
 ## Code Quality
 
 All contributions must pass before merging:
 
 ```bash
-bun nx test           # Unit/integration tests
-bun nx lint           # Linting
-bun nx typecheck      # Type checking
-bun prettier --check . # Formatting
+bun run test          # Unit/integration tests
+bun run lint          # Linting
+bun run typecheck     # Type checking
+bun run format:check  # Formatting
 ```
 
 ### Code Standards

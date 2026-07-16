@@ -14,7 +14,9 @@ describe('Layout', () => {
   });
 
   it('should render the nav slot', () => {
-    const { getByText } = render(<Layout nav={<nav>My Nav</nav>}>content</Layout>);
+    const { getByText } = render(
+      <Layout nav={<nav>My Nav</nav>}>content</Layout>,
+    );
     expect(getByText('My Nav')).toBeTruthy();
   });
 
@@ -24,12 +26,16 @@ describe('Layout', () => {
   });
 
   it('should render the sidebar slot', () => {
-    const { getByText } = render(<Layout sidebar={<div>Sidebar</div>}>content</Layout>);
+    const { getByText } = render(
+      <Layout sidebar={<div>Sidebar</div>}>content</Layout>,
+    );
     expect(getByText('Sidebar')).toBeTruthy();
   });
 
   it('should render the top slot when provided', () => {
-    const { getByText } = render(<Layout top={<div>Top Bar</div>}>content</Layout>);
+    const { getByText } = render(
+      <Layout top={<div>Top Bar</div>}>content</Layout>,
+    );
     expect(getByText('Top Bar')).toBeTruthy();
   });
 

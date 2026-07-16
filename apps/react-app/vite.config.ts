@@ -21,7 +21,7 @@ export default defineConfig(() => ({
     alias: {
       '@schediochron/react-components': resolve(
         __dirname,
-        '../../packages/react-components/src/index.ts',
+        '../../libs/react-components/src/index.ts',
       ),
     },
   },

@@ -9,9 +9,7 @@
       "vitest/importMeta",
       "vite/client",
       "node",
-      "vitest",
-      "@nx/react/typings/cssmodule.d.ts",
-      "@nx/react/typings/image.d.ts"
+      "vitest"
     ]
   },
   "include": [
@@ -34,7 +32,7 @@
       "path": "./tsconfig.app.json"
     },
     {
-      "path": "../../packages/core"
+      "path": "../core"
     }
   ]
 }

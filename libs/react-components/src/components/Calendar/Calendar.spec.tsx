@@ -75,7 +75,9 @@ describe('Calendar', () => {
     ];
     render(<Calendar month={5} year={2024} timeEntries={entries} />);
     // The entry time-log div should be rendered
-    const timeLogs = document.querySelectorAll('.time-log, [class*="time-log"]');
+    const timeLogs = document.querySelectorAll(
+      '.time-log, [class*="time-log"]',
+    );
     expect(timeLogs.length).toBeGreaterThan(0);
   });
 

@@ -183,9 +183,7 @@ export function Calendar({
                   className={`${!isCurrentMonth ? styles['other-month'] : ''} ${
                     isWeekend ? styles['weekend'] : ''
                   }`.trim()}
-                  onClick={
-                    onDateSelect ? () => onDateSelect(date) : undefined
-                  }
+                  onClick={onDateSelect ? () => onDateSelect(date) : undefined}
                 >
                   <span
                     className={`${

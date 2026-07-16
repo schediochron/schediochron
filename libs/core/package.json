@@ -1,5 +1,5 @@
 {
-  "name": "@schediochron/react-components",
+  "name": "@schediochron/core",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -15,8 +15,13 @@
       "default": "./dist/index.js"
     }
   },
-  "peerDependencies": {
-    "@schediochron/core": "*",
-    "react": ">=18.0.0"
+  "scripts": {
+    "build": "tsc -b tsconfig.lib.json",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0",
+    "zod": "^3.24.0"
   }
 }
