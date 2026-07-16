@@ -38,14 +38,14 @@
     },
     "apps/react-app": {
       "name": "@schediochron/react-app",
-      "version": "0.1.1",
+      "version": "0.2.0",
       "dependencies": {
         "@schediochron/react-components": "workspace:^",
       },
     },
     "libs/api": {
       "name": "@schediochron/api",
-      "version": "0.0.1",
+      "version": "0.2.0",
       "dependencies": {
         "@schediochron/core": "workspace:^",
         "hono": "^4.12.0",
@@ -54,7 +54,7 @@
     },
     "libs/core": {
       "name": "@schediochron/core",
-      "version": "0.0.1",
+      "version": "0.2.0",
       "dependencies": {
         "tslib": "^2.3.0",
       },
@@ -67,7 +67,7 @@
     },
     "libs/react-components": {
       "name": "@schediochron/react-components",
-      "version": "0.0.1",
+      "version": "0.2.0",
       "dependencies": {
         "@schediochron/core": "workspace:^",
       },
