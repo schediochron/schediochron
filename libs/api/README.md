@@ -29,11 +29,21 @@ curl http://localhost:3000/health
 bun run --filter @schediochron/api test
 ```
 
-Tests run on [Vitest](https://vitest.dev/).
+Tests run on [`bun test`](https://bun.com/docs/cli/test).
 
 ## Structure
 
-- `src/app.ts` — runtime-agnostic Hono application (routes/middleware).
+- `src/app.ts` — runtime-agnostic Hono application; mounts the routes and the error envelope.
+- `src/routes/` — one module per resource group, mirroring the tags in `openapi.yaml`.
+- `src/stub-data.ts` — the sample payloads the stub routes return.
 - `src/main.ts` — Bun entrypoint; the only runtime-specific glue.
 - `src/index.ts` — public package exports.
 - `openapi.yaml` — the REST contract this package implements.
+
+## Status
+
+Every operation in `openapi.yaml` is routed, but the handlers are stubs: they return fixed
+payloads from `src/stub-data.ts`, shaped like the real responses and typed with
+`@schediochron/core`. Authentication, authorisation and request validation are not implemented —
+every endpoint answers as though the caller were authorised — and arrive in Phase 2 along with
+persistence.
