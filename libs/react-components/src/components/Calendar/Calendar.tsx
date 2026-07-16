@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { TimeEntry } from '@schediochron/core';
 import { getWeekArray } from '../../utils/date';
-import styles from './Calendar.module.css';
+import './Calendar.css';
 
 export interface CalendarProps {
   /** 0-indexed month to display (0 = January). Defaults to the current month. */
@@ -85,12 +85,12 @@ export function Calendar({
   const displayDate = new Date(displayYear, displayMonth, 1);
 
   return (
-    <table className={styles['calendar']}>
+    <table className="calendar">
       <thead>
         <tr>
           <th colSpan={7}>
-            <div className={styles['calendar-header']}>
-              <h2 className={styles['month-year']}>
+            <div className="calendar-header">
+              <h2 className="month-year">
                 <b>
                   {displayDate.toLocaleString('default', {
                     month: 'long',
@@ -100,7 +100,7 @@ export function Calendar({
                   year: 'numeric',
                 })}
               </h2>
-              <nav className={styles['view-nav']}>
+              <nav className="view-nav">
                 <label>
                   <input type="radio" name="view" />
                   Day
@@ -118,7 +118,7 @@ export function Calendar({
                   Year
                 </label>
               </nav>
-              <nav className={styles['seq-nav']}>
+              <nav className="seq-nav">
                 <button onClick={handlePrev}>&lt;</button>
                 <button onClick={handleToday}>Today</button>
                 <button onClick={handleNext}>&gt;</button>
@@ -180,15 +180,13 @@ export function Calendar({
               return (
                 <td
                   key={`${date.getFullYear()}-${date.getMonth()}-${dayNumber}`}
-                  className={`${!isCurrentMonth ? styles['other-month'] : ''} ${
-                    isWeekend ? styles['weekend'] : ''
+                  className={`${!isCurrentMonth ? 'other-month' : ''} ${
+                    isWeekend ? 'weekend' : ''
                   }`.trim()}
                   onClick={onDateSelect ? () => onDateSelect(date) : undefined}
                 >
                   <span
-                    className={`${
-                      isToday && isCurrentMonth ? styles['today'] : ''
-                    }`}
+                    className={isToday && isCurrentMonth ? 'today' : ''}
                     aria-current={
                       isToday && isCurrentMonth ? 'date' : undefined
                     }
@@ -196,9 +194,9 @@ export function Calendar({
                     {dayNumber}
                   </span>
                   {dayEntries.length > 0 && (
-                    <div className={styles['time-log']}>
+                    <div className="time-log">
                       {dayEntries.map((entry) => (
-                        <div key={entry.id} className={styles['entry']}>
+                        <div key={entry.id} className="entry">
                           {formatTime(entry.startTime)}
                           {entry.endTime
                             ? ` – ${formatTime(entry.endTime)}`
@@ -206,9 +204,7 @@ export function Calendar({
                         </div>
                       ))}
                       {completedEntries.length > 0 && (
-                        <div
-                          className={`${styles['summary']} ${styles['positive']}`}
-                        >
+                        <div className="summary positive">
                           {formatDuration(totalMs)}
                         </div>
                       )}

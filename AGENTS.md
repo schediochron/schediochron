@@ -9,8 +9,7 @@ Bun workspaces monorepo, TypeScript, React 19, Playwright, ESLint, Prettier. Bun
 bundling (`bun build`), the dev server, and the testing (`bun test`). Workspace scripts are run
 with `bun run --filter`.
 
-Styles are plain CSS, relying on native nesting. `*.module.css` files are CSS modules, typed by
-each package's `src/assets.d.ts`.
+Styles are plain CSS, relying on native nesting, and typed by each package's `src/assets.d.ts`.
 
 Every app and lib is a self-contained package with its own `src/`.
 
@@ -109,7 +108,11 @@ outputs, `exports`, or the layout of a package.
 - Lint enforces the Rules of React via the React Compiler's analysis rules (purity, immutability,
   set-state-in-render, …). Fix violations rather than suppressing them: they are the preconditions
   for turning the compiler itself on later.
-- Styles live in separate CSS module files (`*.module.css`).
+- Styles live in a plain `.css` file beside the component, imported for its side effect. Scope
+  them by nesting under a single root class named for the component rather than by reaching for
+  CSS modules: Bun's dev server cannot resolve `*.module.css` imports
+  ([oven-sh/bun#18258](https://github.com/oven-sh/bun/issues/18258)), so a module import breaks
+  `bun run dev` while leaving the production build green.
 - Build production bundles with `--production`: it selects React's production JSX runtime.
   `--minify` or a `NODE_ENV` define alone yields a bundle that throws at runtime.
 - The React packages preload `happydom.ts` then `test-setup.ts`, in that order — Testing Library
