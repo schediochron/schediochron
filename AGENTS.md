@@ -38,7 +38,7 @@ bun run dev        # React dev server (http://localhost:4200)
 bun run dev:api    # API dev server (watch mode)
 bun run build      # Build all projects (dependency order)
 bun run typecheck  # tsc -b across all project references
-bun run test       # Unit/integration tests (Vitest)
+bun run test       # Unit/integration tests
 bun run e2e        # Playwright E2E — run `bun run build` first
 bun run lint       # ESLint (bun run lint:fix to auto-fix)
 bun run format     # Prettier
@@ -64,6 +64,28 @@ Branch naming: `{type}/{issueNr}-{issue-name}`, where type is one of `feature`, 
 
 - No direct pushes to `main` — every change goes through a pull request.
 - Never merge a pull request. Merging is a human-only action: stop after opening the PR.
+
+### Roadmap and README
+
+[ROADMAP.md](ROADMAP.md) carries the vision, the module architecture every package is a piece of,
+and where the codebase currently stands. [README.md](README.md) carries the repository layout and
+the commands to run it. Between them they are what a newcomer reads first, and they go stale
+silently — nothing fails when they drift.
+
+So when a change makes part of them untrue, fix it in the same change:
+
+- a module lands, is renamed, or moves between phases
+- the architecture table or the structure block stops matching the packages and directories that
+  exist
+- a documented command changes, or the way the project is built, served or tested changes
+- "Current State" describes work that is now done
+
+Describe what is true now rather than appending a changelog. If you are unsure whether a change
+is worth documenting, raise it instead of deciding silently — docs nobody trusts are worse than
+no docs.
+
+Per-issue progress belongs on the project board and in GitHub issues; ROADMAP.md holds the
+narrative, not the checklist.
 
 ### Package contents
 

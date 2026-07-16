@@ -2,7 +2,7 @@
 
 **Status**: Accepted  
 **Date**: 2026-03-26  
-**Issue**: [#17 — define MVP REST API contract (OpenAPI spec)](https://github.com/cyberniinja/schediochron/issues/17)
+**Issue**: [#17 — define MVP REST API contract (OpenAPI spec)](https://github.com/schediochron/schediochron/issues/17)
 
 ---
 
