@@ -19,6 +19,7 @@
     "test:watch": "bun test --watch"
   },
   "dependencies": {
+    "@schediochron/core": "workspace:^",
     "hono": "^4.12.0",
     "tslib": "^2.3.0"
   }

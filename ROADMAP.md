@@ -116,9 +116,9 @@ Make Schediochron discoverable and easy to adopt.
 
 **Version:** 0.1.x (prototype)
 
-The monorepo is structured around the module architecture above. `@schediochron/core` holds the data models and repository interfaces; the React prototype has been split into `@schediochron/react-components` (the reusable calendar and layout components) and `@schediochron/react-app` (the web UI built on them); and `@schediochron/api` is scaffolded on Hono, serving a health check against the REST contract in `libs/api/openapi.yaml`.
+The monorepo is structured around the module architecture above. `@schediochron/core` holds the data models, repository interfaces and the wire contract types; the React prototype has been split into `@schediochron/react-components` (the reusable calendar and layout components) and `@schediochron/react-app` (the web UI built on them); and `@schediochron/api` routes every endpoint of the REST contract in `libs/api/openapi.yaml` on Hono, answering with stub payloads.
 
-Phase 1 finishes by stubbing out the API's routes from that contract, then running the validation gate. Persistence and real request handling arrive in Phase 2, when `@schediochron/sql` implements the `core` repository interfaces and the API is wired to it.
+Phase 1 finishes by running the validation gate over that architecture. Persistence and real request handling arrive in Phase 2, when `@schediochron/sql` implements the `core` repository interfaces, the API is wired to it, and authentication and request validation replace the stubs.
 
 ---
 
