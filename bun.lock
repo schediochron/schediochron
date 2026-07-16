@@ -40,7 +40,7 @@
       "name": "@schediochron/react-app",
       "version": "0.1.1",
       "dependencies": {
-        "@schediochron/react-components": "*",
+        "@schediochron/react-components": "workspace:^",
       },
     },
     "apps/react-app-e2e": {
@@ -60,14 +60,24 @@
       "version": "0.0.1",
       "dependencies": {
         "tslib": "^2.3.0",
+      },
+      "devDependencies": {
+        "zod": "^3.24.0",
+      },
+      "peerDependencies": {
         "zod": "^3.24.0",
       },
     },
     "libs/react-components": {
       "name": "@schediochron/react-components",
       "version": "0.0.1",
+      "dependencies": {
+        "@schediochron/core": "workspace:^",
+      },
+      "devDependencies": {
+        "react": "^19.2.4",
+      },
       "peerDependencies": {
-        "@schediochron/core": "*",
         "react": ">=18.0.0",
       },
     },

@@ -10,6 +10,6 @@
     "test:watch": "bun test --preload ./happydom.ts --preload ./test-setup.ts --watch"
   },
   "dependencies": {
-    "@schediochron/react-components": "*"
+    "@schediochron/react-components": "workspace:^"
   }
 }

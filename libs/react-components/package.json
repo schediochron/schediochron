@@ -15,13 +15,24 @@
       "default": "./dist/index.js"
     }
   },
+  "files": [
+    "dist",
+    "src",
+    "!**/*.spec.*",
+    "!**/*.tsbuildinfo"
+  ],
   "scripts": {
     "build": "bun build ./src/index.ts --outdir dist --target browser --format esm --production --external react --external react-dom --external react/jsx-runtime --external @schediochron/core && tsc -b tsconfig.app.json",
     "test": "bun test --preload ./happydom.ts --preload ./test-setup.ts",
     "test:watch": "bun test --preload ./happydom.ts --preload ./test-setup.ts --watch"
   },
+  "dependencies": {
+    "@schediochron/core": "workspace:^"
+  },
   "peerDependencies": {
-    "@schediochron/core": "*",
     "react": ">=18.0.0"
+  },
+  "devDependencies": {
+    "react": "^19.2.4"
   }
 }

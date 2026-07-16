@@ -66,6 +66,21 @@ Branch naming: `{type}/{issueNr}-{issue-name}`, where type is one of `feature`, 
 - No direct pushes to `main` — every change goes through a pull request.
 - Never merge a pull request. Merging is a human-only action: stop after opening the PR.
 
+### Package contents
+
+Each lib has a `files` allowlist in its `package.json`: whatever is not listed is not published,
+silently. The libs are `private` today but are intended for a registry, so keep the allowlist
+honest as you go.
+
+Whenever you add a file a consumer would need at runtime — a new entrypoint, an asset, a
+generated artifact like `openapi.yaml`, anything an `exports` condition points at — add it to
+`files` in the same change. Whenever you add a build- or test-only file, keep it out. If you
+cannot tell which side a file belongs on, ask rather than guess: a missing file breaks consumers
+only after publishing, and a stray one leaks internals forever.
+
+`bun pm pack` in a package prints exactly what would ship — check it when you change build
+outputs, `exports`, or the layout of a package.
+
 ### Code
 
 - TypeScript strict mode is enforced — always provide proper type annotations.
