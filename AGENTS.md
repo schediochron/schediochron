@@ -38,7 +38,7 @@ bun run dev        # React dev server (http://localhost:4200)
 bun run dev:api    # API dev server (watch mode)
 bun run build      # Build all projects (dependency order)
 bun run typecheck  # tsc -b across all project references
-bun run test       # Unit/integration tests (Vitest)
+bun run test       # Unit/integration tests
 bun run e2e        # Playwright E2E — run `bun run build` first
 bun run lint       # ESLint (bun run lint:fix to auto-fix)
 bun run format     # Prettier
