@@ -10,15 +10,15 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router-dom';
-import style from './Navbar.module.css';
+import './Navbar.css';
 
 export function Navbar() {
   return (
-    <nav className={`navbar ${style.navbar}`}>
+    <nav className="navbar">
       <div className="logo">
         <FontAwesomeIcon icon={faHourglassHalf} size="3x" />
       </div>
-      <div className={style.spacer} />
+      <div className="spacer" />
       <NavLink className="nav-link" to="/">
         {({ isActive }) => (
           <>
@@ -30,7 +30,7 @@ export function Navbar() {
           </>
         )}
       </NavLink>
-      <div className={style.spacer} />
+      <div className="spacer" />
       <NavLink className="nav-link" to="/profile">
         {({ isActive }) => (
           <>

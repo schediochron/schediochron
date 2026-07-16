@@ -27,7 +27,8 @@
     color: var(--note);
     text-decoration: none;
 
-    &:global(.active) {
+    /* react-router sets .active on the matching NavLink. */
+    &.active {
       color: var(--primary);
     }
 
