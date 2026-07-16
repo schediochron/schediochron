@@ -1,6 +1,6 @@
 # Schediochron Roadmap
 
-> **Track progress on the [Schediochron Roadmap project board →](https://github.com/users/cyberniinja/projects/2)**
+> **Track progress on the [Schediochron Roadmap project board →](https://github.com/orgs/schediochron/projects/1)**
 
 ---
 
@@ -126,4 +126,4 @@ Phase 1 finishes by stubbing out the API's routes from that contract, then runni
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for how to get involved.
 Issues and feature requests are tracked on [GitHub Issues](https://github.com/schediochron/schediochron/issues).
-The full roadmap is maintained on the [project board](https://github.com/users/cyberniinja/projects/2).
+The full roadmap is maintained on the [project board](https://github.com/orgs/schediochron/projects/1).

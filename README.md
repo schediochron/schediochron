@@ -5,7 +5,7 @@
 Teams shouldn't have to pay for time management software. Schediochron provides everything you need to run your own time tracking system — pick only the parts you need, or use a pre-configured starter bundle to get running in minutes.
 
 > 📍 See [ROADMAP.md](ROADMAP.md) for the full vision and planned milestones.
-> 📋 Track progress on the [project board →](https://github.com/users/cyberniinja/projects/2)
+> 📋 Track progress on the [project board →](https://github.com/orgs/schediochron/projects/1)
 
 ---
 
