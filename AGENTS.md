@@ -65,6 +65,21 @@ Branch naming: `{type}/{issueNr}-{issue-name}`, where type is one of `feature`, 
 - No direct pushes to `main` — every change goes through a pull request.
 - Never merge a pull request. Merging is a human-only action: stop after opening the PR.
 
+### Roadmap
+
+[ROADMAP.md](ROADMAP.md) carries the vision, the module architecture every package is a piece of,
+and a description of where the codebase currently stands. It is what a newcomer reads first, and
+it goes stale silently — nothing fails when it drifts.
+
+So when a change makes part of it untrue, update it in the same change: a module lands, is renamed
+or moves between phases; the architecture table no longer matches the packages that exist; the
+"Current State" section describes work that is now done. Describe what is true now rather than
+appending a changelog. If you are unsure whether a change is roadmap-worthy, raise it instead of
+deciding silently — a roadmap nobody trusts is worse than no roadmap.
+
+Per-issue progress belongs on the project board and in GitHub issues; ROADMAP.md holds the
+narrative, not the checklist.
+
 ### Package contents
 
 Each lib has a `files` allowlist in its `package.json`: whatever is not listed is not published,
