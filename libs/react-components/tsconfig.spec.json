@@ -2,14 +2,12 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./out-tsc/test",
-    "types": ["bun"],
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "lib": ["dom", "es2022"],
+    "types": ["bun"]
   },
   "include": [
-    "e2e/**/*.ts",
-    "./playwright.config.ts",
     "./test-setup.ts",
-    "./preview.ts",
     "src/**/*.test.ts",
     "src/**/*.spec.ts",
     "src/**/*.test.tsx",
@@ -23,6 +21,9 @@
   "references": [
     {
       "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "../core"
     }
   ]
 }

@@ -44,18 +44,22 @@ Schediochron is composed of independently usable packages:
 ```
 schediochron/
 ├── apps/
-│   ├── schediochron/           # @schediochron/react-app (prototype)
-│   └── schediochron-e2e/       # Playwright E2E tests
-├── packages/                   # Library packages (added in Phase 1+)
+│   └── react-app/              # @schediochron/react-app — React app (e2e/ holds its E2E tests)
+├── libs/
+│   ├── core/                   # @schediochron/core — domain models
+│   ├── react-components/       # @schediochron/react-components — shared UI
+│   └── api/                    # @schediochron/api — Hono API + openapi.yaml
 ├── docs/
 │   └── adr/                    # Architecture Decision Records
-├── openapi.yaml                # REST API contract (added in Phase 1)
 ├── ROADMAP.md                  # Vision and phase breakdown
 ├── CONTRIBUTING.md             # Contribution guidelines
-├── .agents/                    # AI agent workflow documentation
-├── nx.json                     # Nx workspace config
+├── AGENTS.md                   # Rules for AI agents
 └── tsconfig.base.json          # Shared TypeScript config
 ```
+
+The repo is a plain [Bun workspaces](https://bun.com/docs/install/workspaces) monorepo — every
+app and lib is a self-contained package that owns its scripts, and the root scripts fan out
+with `bun run --filter`. Bun does the bundling, the dev server, and the testing.
 
 ---
 
@@ -64,48 +68,32 @@ schediochron/
 ### Prerequisites
 
 - [Bun](https://bun.sh/) installed
-- A FontAwesome Pro token (see `bunfig.toml.example`)
 
 ### Setup
 
 ```bash
-# Copy Bun config and add your FontAwesome token
-cp bunfig.toml.example bunfig.toml
-
 # Install dependencies
 bun install
 
 # Start the React app dev server (http://localhost:4200)
-bun nx serve schediochron
+bun run dev
 ```
 
 ### Common Commands
 
 ```bash
-# Build
-bun nx build schediochron
-
-# Run unit/integration tests
-bun nx test schediochron
-
-# Run E2E tests
-bun nx e2e schediochron-e2e
-
-# Lint
-bun nx lint schediochron
-
-# Type check
-bun nx typecheck schediochron
-
-# Format
-bun prettier --write .
+bun run build      # Build all projects
+bun run test       # Unit/integration tests
+bun run e2e        # E2E tests (run `bun run build` first)
+bun run lint       # Lint
+bun run typecheck  # Type check
+bun run format     # Format
 ```
 
-Once the monorepo grows in Phase 1+, use `nx run-many` to target all packages:
+Target a single project with `--filter`:
 
 ```bash
-bun nx run-many --target=build --all
-bun nx run-many --target=test --all
+bun run --filter @schediochron/core test
 ```
 
 ---
@@ -114,7 +102,7 @@ bun nx run-many --target=test --all
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on issues, branches, commits, code quality, and versioning.
 
-This project uses a structured 5-phase agent workflow. See [`.agents/index.md`](.agents/index.md) for details on how to work with AI agents in this repo.
+Working with AI agents? [AGENTS.md](AGENTS.md) holds the rules they follow.
 
 ---
 

@@ -18,11 +18,9 @@
     "target": "es2022",
     "customConditions": ["@schediochron/source"],
     "paths": {
-      "@schediochron/api": ["./packages/api/dist/index.d.ts"],
-      "@schediochron/core": ["./packages/core/dist/index.d.ts"],
-      "@schediochron/react-components": [
-        "./packages/react-components/dist/index.d.ts"
-      ]
+      "@schediochron/api": ["./libs/api/src/index.ts"],
+      "@schediochron/core": ["./libs/core/src/index.ts"],
+      "@schediochron/react-components": ["./libs/react-components/src/index.ts"]
     }
   }
 }

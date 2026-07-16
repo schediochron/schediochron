@@ -4,19 +4,16 @@
   "files": [],
   "references": [
     {
-      "path": "./apps/react-app-e2e"
-    },
-    {
       "path": "./apps/react-app"
     },
     {
-      "path": "./packages/api"
+      "path": "./libs/api"
     },
     {
-      "path": "./packages/core"
+      "path": "./libs/core"
     },
     {
-      "path": "./packages/react-components"
+      "path": "./libs/react-components"
     }
   ]
 }

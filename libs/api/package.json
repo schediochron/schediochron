@@ -1,0 +1,25 @@
+{
+  "name": "@schediochron/api",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./dist/main.js",
+  "files": [
+    "dist",
+    "src",
+    "openapi.yaml",
+    "!**/*.spec.*",
+    "!**/*.tsbuildinfo"
+  ],
+  "scripts": {
+    "dev": "bun run --watch src/main.ts",
+    "start": "bun run src/main.ts",
+    "build": "tsc -b tsconfig.lib.json",
+    "test": "bun test",
+    "test:watch": "bun test --watch"
+  },
+  "dependencies": {
+    "hono": "^4.12.0",
+    "tslib": "^2.3.0"
+  }
+}

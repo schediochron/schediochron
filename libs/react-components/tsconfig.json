@@ -1,4 +1,5 @@
 {
+  "extends": "../../tsconfig.base.json",
   "files": [],
   "include": [],
   "references": [
@@ -9,8 +10,7 @@
       "path": "./tsconfig.spec.json"
     },
     {
-      "path": "../../libs/react-components"
+      "path": "../core"
     }
-  ],
-  "extends": "../../tsconfig.base.json"
+  ]
 }

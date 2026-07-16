@@ -27,12 +27,12 @@ adapter so we are not locked to a single runtime or hosting model.
 
 ## Options Considered
 
-| Framework          | Bun support                     | TS-first                    | Runtime-agnostic                                             | Ecosystem                        | Notes                                                            |
-| ------------------ | ------------------------------- | --------------------------- | ----------------------------------------------------------- | -------------------------------- | --------------------------------------------------------------- |
-| **Hono**           | First-class (official adapter)  | Yes, excellent inference    | Yes — Web-standard `Request`/`Response`, adapters per runtime | Large, actively maintained       | `@hono/zod-openapi` binds Zod schemas to the OpenAPI contract   |
-| **Elysia**         | First-class (Bun-native)        | Yes, best-in-class          | No — tightly coupled to Bun                                  | Growing, smaller                 | Fastest on Bun, but Bun lock-in works against the adapter goal  |
-| **Express**        | Works via Node compat           | Types are add-on (`@types`) | Node-centric                                                 | Largest, mature                  | Callback-era design, no Web-standard primitives, weak TS story  |
-| **Fastify**        | Works via Node compat           | Good with plugins           | Node-centric                                                 | Large                            | Solid, but Node-oriented and heavier than needed for the MVP    |
+| Framework   | Bun support                    | TS-first                    | Runtime-agnostic                                              | Ecosystem                  | Notes                                                          |
+| ----------- | ------------------------------ | --------------------------- | ------------------------------------------------------------- | -------------------------- | -------------------------------------------------------------- |
+| **Hono**    | First-class (official adapter) | Yes, excellent inference    | Yes — Web-standard `Request`/`Response`, adapters per runtime | Large, actively maintained | `@hono/zod-openapi` binds Zod schemas to the OpenAPI contract  |
+| **Elysia**  | First-class (Bun-native)       | Yes, best-in-class          | No — tightly coupled to Bun                                   | Growing, smaller           | Fastest on Bun, but Bun lock-in works against the adapter goal |
+| **Express** | Works via Node compat          | Types are add-on (`@types`) | Node-centric                                                  | Largest, mature            | Callback-era design, no Web-standard primitives, weak TS story |
+| **Fastify** | Works via Node compat          | Good with plugins           | Node-centric                                                  | Large                      | Solid, but Node-oriented and heavier than needed for the MVP   |
 
 ### Evaluation against the criteria
 
