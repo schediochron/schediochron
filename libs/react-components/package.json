@@ -16,9 +16,9 @@
     }
   },
   "scripts": {
-    "build": "vite build && tsc -b tsconfig.app.json",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "build": "bun build ./src/index.ts --outdir dist --target browser --format esm --production --external react --external react-dom --external react/jsx-runtime --external @schediochron/core && tsc -b tsconfig.app.json",
+    "test": "bun test --preload ./happydom.ts --preload ./test-setup.ts",
+    "test:watch": "bun test --preload ./happydom.ts --preload ./test-setup.ts --watch"
   },
   "peerDependencies": {
     "@schediochron/core": "*",

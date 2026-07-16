@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from 'bun:test';
 import { validateTeam } from './team.js';
 
 const adminId = '123e4567-e89b-12d3-a456-426614174000';

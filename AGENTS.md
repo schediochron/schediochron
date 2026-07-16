@@ -5,15 +5,19 @@ read the task, do the work, follow the rules below.
 
 ## Stack
 
-Bun workspaces monorepo, TypeScript, React 19 + Vite, Vitest, Playwright, ESLint, Prettier.
-No Nx — workspace scripts are run with `bun run --filter`.
+Bun workspaces monorepo, TypeScript, React 19, Playwright, ESLint, Prettier. Bun does the
+bundling (`bun build`), the dev server, and the testing (`bun test`). Workspace scripts are run
+with `bun run --filter`.
+
+Styles are plain CSS, relying on native nesting. `*.module.css` files are CSS modules, typed by
+each package's `src/assets.d.ts`.
 
 Every app and lib is a self-contained package with its own `src/`.
 
 ```
 schediochron/
 ├── apps/
-│   ├── react-app/            # @schediochron/react-app — main React app (Vite + SCSS)
+│   ├── react-app/            # @schediochron/react-app — main React app
 │   └── react-app-e2e/        # @schediochron/react-app-e2e — Playwright E2E
 ├── libs/
 │   ├── core/                 # @schediochron/core — domain models and types
@@ -66,11 +70,18 @@ Branch naming: `{type}/{issueNr}-{issue-name}`, where type is one of `feature`, 
 
 - TypeScript strict mode is enforced — always provide proper type annotations.
 - Functional React components only; hooks for state and side effects; props typed with interfaces.
-- Styles live in separate SCSS module files.
+- Lint enforces the Rules of React via the React Compiler's analysis rules (purity, immutability,
+  set-state-in-render, …). Fix violations rather than suppressing them: they are the preconditions
+  for turning the compiler itself on later.
+- Styles live in separate CSS module files (`*.module.css`).
+- Build production bundles with `--production`: it selects React's production JSX runtime.
+  `--minify` or a `NODE_ENV` define alone yields a bundle that throws at runtime.
+- The React packages preload `happydom.ts` then `test-setup.ts`, in that order — Testing Library
+  binds `screen` at import time and needs the DOM registered first.
 - No `console.error` or `console.warn` in production code.
-- Unit/integration tests: Vitest, named `*.spec.ts(x)` or `*.test.ts(x)`, Testing Library for
-  components. E2E: Playwright in `apps/react-app-e2e/src/` — test user flows, not implementation
-  details.
+- Unit/integration tests: named `*.spec.ts(x)` or `*.test.ts(x)`, importing from `bun:test`,
+  Testing Library for components. E2E: Playwright in `apps/react-app-e2e/src/` — test user flows,
+  not implementation details.
 - Adding a workspace: create it under `apps/` or `libs/`, give it the scripts the root scripts
   expect (`build`, `test`, …), and add it to the `references` in `tsconfig.json`.
 

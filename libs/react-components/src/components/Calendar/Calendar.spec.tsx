@@ -1,3 +1,4 @@
+import { describe, it, expect, mock } from 'bun:test';
 import { render, screen, fireEvent } from '@testing-library/react';
 import type { TimeEntry } from '@schediochron/core';
 import Calendar from './Calendar';
@@ -82,7 +83,7 @@ describe('Calendar', () => {
   });
 
   it('should call onDateSelect when a date cell is clicked', () => {
-    const handleSelect = vi.fn();
+    const handleSelect = mock();
     render(<Calendar month={5} year={2024} onDateSelect={handleSelect} />);
     // Click on the 15th cell (June 15, 2024)
     const cells = document.querySelectorAll('td');

@@ -17,8 +17,8 @@
   },
   "scripts": {
     "build": "tsc -b tsconfig.lib.json",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "test": "bun test",
+    "test:watch": "bun test --watch"
   },
   "dependencies": {
     "tslib": "^2.3.0",

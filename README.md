@@ -60,7 +60,7 @@ schediochron/
 
 The repo is a plain [Bun workspaces](https://bun.com/docs/install/workspaces) monorepo — every
 app and lib is a self-contained package that owns its scripts, and the root scripts fan out
-with `bun run --filter`.
+with `bun run --filter`. Bun does the bundling, the dev server, and the testing.
 
 ---
 

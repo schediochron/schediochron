@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { TimeEntry } from '@schediochron/core';
 import { getWeekArray } from '../../utils/date';
-import styles from './Calendar.module.scss';
+import styles from './Calendar.module.css';
 
 export interface CalendarProps {
   /** 0-indexed month to display (0 = January). Defaults to the current month. */

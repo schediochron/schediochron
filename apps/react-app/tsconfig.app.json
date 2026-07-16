@@ -5,10 +5,14 @@
     "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo",
     "jsx": "react-jsx",
     "lib": ["dom"],
-    "types": ["node", "vite/client"],
+    "types": ["bun"],
     "rootDir": "src"
   },
-  "references": [{ "path": "../../libs/react-components" }],
+  "references": [
+    {
+      "path": "../../libs/react-components"
+    }
+  ],
   "exclude": [
     "out-tsc",
     "dist",

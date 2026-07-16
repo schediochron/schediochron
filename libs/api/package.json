@@ -8,8 +8,8 @@
     "dev": "bun run --watch src/main.ts",
     "start": "bun run src/main.ts",
     "build": "tsc -b tsconfig.lib.json",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "test": "bun test",
+    "test:watch": "bun test --watch"
   },
   "dependencies": {
     "hono": "^4.12.0",

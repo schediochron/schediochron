@@ -32,7 +32,9 @@ export default [
     files: reactFiles,
     plugins: { 'react-hooks': reactHooks, 'jsx-a11y': jsxA11y },
     rules: {
-      ...reactHooks.configs.recommended.rules,
+      // Includes the React Compiler's static analysis rules (purity, immutability,
+      // set-state-in-render, …) — the Rules of React the compiler relies on.
+      ...reactHooks.configs['recommended-latest'].rules,
       ...jsxA11y.flatConfigs.recommended.rules,
       // The React 19 JSX transform makes the React import unnecessary.
       'react/react-in-jsx-scope': 'off',

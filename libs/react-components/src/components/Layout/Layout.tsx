@@ -1,4 +1,4 @@
-import './Layout.scss';
+import './Layout.css';
 
 export interface LayoutProps {
   children: React.ReactNode;

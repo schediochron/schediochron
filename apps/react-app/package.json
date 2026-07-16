@@ -3,11 +3,11 @@
   "version": "0.1.1",
   "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "dev": "PORT=4200 bun ./index.html",
+    "build": "bun build ./index.html --outdir dist --production",
+    "preview": "bun ./preview.ts",
+    "test": "bun test --preload ./happydom.ts --preload ./test-setup.ts",
+    "test:watch": "bun test --preload ./happydom.ts --preload ./test-setup.ts --watch"
   },
   "dependencies": {
     "@schediochron/react-components": "*"

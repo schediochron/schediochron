@@ -10,7 +10,7 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router-dom';
-import style from './Navbar.module.scss';
+import style from './Navbar.module.css';
 
 export function Navbar() {
   return (

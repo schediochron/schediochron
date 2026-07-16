@@ -182,7 +182,7 @@ bun run format:check  # Formatting
 - Use functional React components (no class components)
 - Use hooks for state and side effects
 - Props must be typed with TypeScript interfaces
-- Styles in separate SCSS module files
+- Styles in separate CSS module files (`*.module.css`) — plain CSS, no preprocessor
 - No `console.error` or `console.warn` in production code
 
 ## AI Agents
