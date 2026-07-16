@@ -52,7 +52,7 @@ schediochron/
 ├── openapi.yaml                # REST API contract (added in Phase 1)
 ├── ROADMAP.md                  # Vision and phase breakdown
 ├── CONTRIBUTING.md             # Contribution guidelines
-├── .agents/                    # AI agent workflow documentation
+├── AGENTS.md                   # Rules for AI agents
 ├── nx.json                     # Nx workspace config
 └── tsconfig.base.json          # Shared TypeScript config
 ```
@@ -114,7 +114,7 @@ bun nx run-many --target=test --all
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on issues, branches, commits, code quality, and versioning.
 
-This project uses a structured 5-phase agent workflow. See [`.agents/index.md`](.agents/index.md) for details on how to work with AI agents in this repo.
+Working with AI agents? [AGENTS.md](AGENTS.md) holds the rules they follow.
 
 ---
 

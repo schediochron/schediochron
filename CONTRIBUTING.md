@@ -166,14 +166,6 @@ Types: `feat`, `fix`, `chore`, `refactor`, `docs`, `test`, `style`
 
 Example: `feat(#42): add profile component`
 
-### Co-authored Commits
-
-When working with AI agents, include the trailer:
-
-```
-Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
-```
-
 ## Versioning
 
 Tags follow monorepo-scoped semantic versioning:
@@ -210,56 +202,9 @@ bun prettier --check . # Formatting
 
 ## AI Agents
 
-This project uses a skill-based AI agent workflow for structured development. Skills are
-self-contained markdown files in [`.agents/skills/`](.agents/skills/) — each one describes a
-phase or utility that any AI tool can read and follow.
+[AGENTS.md](AGENTS.md) is the single set of instructions for AI agents in this repo — stack,
+commands, and the rules they must follow. There is no prescribed workflow; use your tool however
+you like, as long as the rules hold.
 
-### Quick Start
-
-Invoke skills by name in your AI tool's chat or command interface:
-
-```
-work-issue #42          ← start the 5-phase workflow with an existing issue
-work-issue              ← describe the task interactively
-```
-
-### The 5-Phase Workflow
-
-Each phase is **user-initiated** — the skill completes a phase and tells you which to invoke next.
-
-| Phase              | Skill                                  | Deliverable                              |
-| ------------------ | -------------------------------------- | ---------------------------------------- |
-| 1 — Comprehension  | `comprehend-issue [#N \| description]` | `comprehension.md`, planning lock active |
-| 2 — Planning       | `plan-issue {folder}`                  | `planning.md`                            |
-| 3 — Implementation | `implement-issue {folder}`             | Code changes, `implementation.md`        |
-| 4 — Verification   | `verify-issue {folder}`                | `verification.md` (PASS/FAIL)            |
-| 5 — Reporting      | `report-issue {folder}`                | `report.md`, pull request                |
-
-### Planning Lock
-
-Phases 1 and 2 activate a planning lock (`.agents/.planning-active`). While the lock is active,
-**no source file edits are permitted** — only issue folder artifacts. Cleared by Phase 3.
-
-To remove a stale lock: run the `unlock` skill.
-
-### Utility Skills
-
-| Skill                                             | Description                                          |
-| ------------------------------------------------- | ---------------------------------------------------- |
-| `quick-implement {folder} "{desc}"`               | Fast path for 1–5 file tasks                         |
-| `review-code {folder} [--staged\|--branch\|--pr]` | Code review → annotatable `review.md`                |
-| `request-change {folder}`                         | Document a targeted change (planning-lock protected) |
-| `apply-change-request {folder} {N}`               | Execute a reviewed change request                    |
-| `address-review-findings {folder}`                | Apply `[FIX]`/`[SKIP]`/`[MANUAL]` annotations        |
-| `discuss-issue {folder}`                          | Refine requirements without restarting Phase 1       |
-| `analyze-codebase {topic}`                        | Generate codebase analysis with mermaid diagrams     |
-
-### Tool-Specific Setup (Optional)
-
-Skills work via natural language out of the box. For slash command or skill-panel support,
-copy skills to your tool's expected directory (both are gitignored):
-
-- **Copilot CLI**: `.github/agents/` with `.agent.md` extension
-- **Claude Code**: `.claude/commands/`
-
-See [AGENTS.md](AGENTS.md) for the full skill index and more details.
+Tool-specific config directories (`.claude/`, `.github/agents/`) are gitignored — add your own
+locally.
