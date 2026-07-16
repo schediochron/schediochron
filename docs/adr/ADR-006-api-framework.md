@@ -2,7 +2,7 @@
 
 **Status**: Accepted  
 **Date**: 2026-07-15  
-**Issue**: [#82 — scaffold `@schediochron/api` package and evaluate API framework](https://github.com/cyberniinja/schediochron/issues/82)
+**Issue**: [#82 — scaffold `@schediochron/api` package and evaluate API framework](https://github.com/schediochron/schediochron/issues/82)
 
 ---
 
