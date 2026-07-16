@@ -65,17 +65,24 @@ Branch naming: `{type}/{issueNr}-{issue-name}`, where type is one of `feature`, 
 - No direct pushes to `main` — every change goes through a pull request.
 - Never merge a pull request. Merging is a human-only action: stop after opening the PR.
 
-### Roadmap
+### Roadmap and README
 
 [ROADMAP.md](ROADMAP.md) carries the vision, the module architecture every package is a piece of,
-and a description of where the codebase currently stands. It is what a newcomer reads first, and
-it goes stale silently — nothing fails when it drifts.
+and where the codebase currently stands. [README.md](README.md) carries the repository layout and
+the commands to run it. Between them they are what a newcomer reads first, and they go stale
+silently — nothing fails when they drift.
 
-So when a change makes part of it untrue, update it in the same change: a module lands, is renamed
-or moves between phases; the architecture table no longer matches the packages that exist; the
-"Current State" section describes work that is now done. Describe what is true now rather than
-appending a changelog. If you are unsure whether a change is roadmap-worthy, raise it instead of
-deciding silently — a roadmap nobody trusts is worse than no roadmap.
+So when a change makes part of them untrue, fix it in the same change:
+
+- a module lands, is renamed, or moves between phases
+- the architecture table or the structure block stops matching the packages and directories that
+  exist
+- a documented command changes, or the way the project is built, served or tested changes
+- "Current State" describes work that is now done
+
+Describe what is true now rather than appending a changelog. If you are unsure whether a change
+is worth documenting, raise it instead of deciding silently — docs nobody trusts are worse than
+no docs.
 
 Per-issue progress belongs on the project board and in GitHub issues; ROADMAP.md holds the
 narrative, not the checklist.
