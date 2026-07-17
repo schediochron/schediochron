@@ -8,9 +8,18 @@ export { userSchema, validateUser } from './models/user.js';
 export type { Team } from './models/team.js';
 export { teamSchema, validateTeam } from './models/team.js';
 
+export type { RefreshToken } from './models/refresh-token.js';
+export {
+  refreshTokenSchema,
+  validateRefreshToken,
+  isRefreshTokenActive,
+} from './models/refresh-token.js';
+
+export type { CrudRepository } from './repositories/crud-repository.js';
 export type { TimeEntryRepository } from './repositories/time-entry-repository.js';
 export type { UserRepository } from './repositories/user-repository.js';
 export type { TeamRepository } from './repositories/team-repository.js';
+export type { RefreshTokenRepository } from './repositories/refresh-token-repository.js';
 
 export { computeDuration } from './utils/time-entry.js';
 

@@ -1,9 +1,9 @@
 import type { User } from '../models/user.js';
+import type { CrudRepository } from './crud-repository.js';
 
-export interface UserRepository {
-  findById(id: string): Promise<User | null>;
-  findAll(): Promise<User[]>;
-  create(user: User): Promise<User>;
-  update(user: User): Promise<User>;
-  delete(id: string): Promise<void>;
+export interface UserRepository extends CrudRepository<User> {
+  /**
+   * Finds a user by username (unique). Useful for Auth.
+   */
+  findByUsername(username: string): Promise<User | null>;
 }
