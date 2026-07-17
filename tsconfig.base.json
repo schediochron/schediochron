@@ -20,7 +20,8 @@
     "paths": {
       "@schediochron/api": ["./libs/api/src/index.ts"],
       "@schediochron/core": ["./libs/core/src/index.ts"],
-      "@schediochron/react-components": ["./libs/react-components/src/index.ts"]
+      "@schediochron/react-components": ["./libs/react-components/src/index.ts"],
+      "@schediochron/sql": ["./libs/sql/src/index.ts"]
     }
   }
 }

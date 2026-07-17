@@ -14,6 +14,9 @@
     },
     {
       "path": "./libs/react-components"
+    },
+    {
+      "path": "./libs/sql"
     }
   ]
 }
