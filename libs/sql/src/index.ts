@@ -6,8 +6,6 @@
 
 export { createSqlClient } from './db.js';
 
-export { TeamSqlRepository, LastAdminError } from './team-repository.js';
-
 export type { Migration, MigrationStatus } from './migrate.js';
 export {
   discoverMigrations,
@@ -18,5 +16,12 @@ export {
   migrationStatus,
 } from './migrate.js';
 
+export {
+  SqlTimeEntryRepository,
+  RunningEntryExistsError,
+} from './time-entry-repository.js';
+
 export type { DuplicateUserField } from './user-repository.js';
 export { DuplicateUserError, UserRepository } from './user-repository.js';
+
+export { TeamSqlRepository, LastAdminError } from './team-repository.js';
