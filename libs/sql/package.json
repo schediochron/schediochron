@@ -18,13 +18,15 @@
   "files": [
     "dist",
     "src",
+    "migrations",
     "!**/*.spec.*",
     "!**/*.tsbuildinfo"
   ],
   "scripts": {
     "build": "tsc -b tsconfig.lib.json",
     "test": "bun test",
-    "test:watch": "bun test --watch"
+    "test:watch": "bun test --watch",
+    "migrate": "bun run src/migrate.ts"
   },
   "dependencies": {
     "@schediochron/core": "workspace:^",
