@@ -1,0 +1,92 @@
+# Local development stack — `docker compose up` brings up PostgreSQL, runs the
+# migrations, then starts the API and the React dev server. The repository is
+# bind-mounted so edits on the host hot-reload inside the containers; a named
+# volume holds node_modules so the container's Linux binaries never clash with
+# the host's.
+name: schediochron
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-schediochron}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-schediochron}
+      POSTGRES_DB: ${POSTGRES_DB:-schediochron}
+    ports:
+      - '${POSTGRES_PORT:-5432}:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          'CMD-SHELL',
+          'pg_isready -U ${POSTGRES_USER:-schediochron} -d ${POSTGRES_DB:-schediochron}',
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # One-shot: populate the shared node_modules volume once so the long-running
+  # services don't each race to install.
+  deps:
+    image: oven/bun:1.3
+    working_dir: /app
+    environment:
+      FONTAWESOME_TOKEN: ${FONTAWESOME_TOKEN:-}
+    volumes:
+      - .:/app
+      - node-modules:/app/node_modules
+    command: ['bun', 'install', '--frozen-lockfile']
+
+  # One-shot: apply pending migrations, then exit. The API waits on this.
+  migrate:
+    image: oven/bun:1.3
+    working_dir: /app
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgres://schediochron:schediochron@postgres:5432/schediochron}
+    volumes:
+      - .:/app
+      - node-modules:/app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+      deps:
+        condition: service_completed_successfully
+    command: ['bun', 'run', '--filter', '@schediochron/sql', 'migrate']
+
+  api:
+    image: oven/bun:1.3
+    working_dir: /app
+    environment:
+      PORT: '3000'
+      DATABASE_URL: ${DATABASE_URL:-postgres://schediochron:schediochron@postgres:5432/schediochron}
+    ports:
+      - '${API_PORT:-3000}:3000'
+    volumes:
+      - .:/app
+      - node-modules:/app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    command: ['bun', 'run', 'dev:api']
+
+  web:
+    image: oven/bun:1.3
+    working_dir: /app
+    environment:
+      FONTAWESOME_TOKEN: ${FONTAWESOME_TOKEN:-}
+    ports:
+      - '${WEB_PORT:-4200}:4200'
+    volumes:
+      - .:/app
+      - node-modules:/app/node_modules
+    depends_on:
+      deps:
+        condition: service_completed_successfully
+    command: ['bun', 'run', 'dev']
+
+volumes:
+  postgres-data:
+  node-modules:

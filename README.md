@@ -79,6 +79,22 @@ bun install
 bun run dev
 ```
 
+### Full stack with Docker Compose
+
+To run the whole stack — PostgreSQL, the API, and the web dev server — with one
+command:
+
+```bash
+cp .env.example .env        # then set FONTAWESOME_TOKEN (see CONTRIBUTING.md)
+docker compose up
+```
+
+This starts PostgreSQL, applies the database migrations automatically, then
+brings up the API (http://localhost:3000) and the React dev server
+(http://localhost:4200). The repository is bind-mounted, so edits hot-reload.
+Stop with `docker compose down`, or `docker compose down -v` to also drop the
+database volume.
+
 ### Common Commands
 
 ```bash
