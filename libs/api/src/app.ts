@@ -1,5 +1,5 @@
-import { Hono } from 'hono';
 import type { ErrorResponse } from '@schediochron/core';
+import { createRouter } from './http.js';
 import { authRoutes } from './routes/auth.js';
 import { reportRoutes } from './routes/reports.js';
 import { teamRoutes } from './routes/teams.js';
@@ -11,11 +11,12 @@ import { userRoutes } from './routes/users.js';
  * Web-standard `Request`/`Response` (see ADR-006). Runtime entrypoints such as
  * `main.ts` adapt `app.fetch` to a concrete server.
  *
- * Routes mirror `openapi.yaml` and currently return stub payloads (#83).
- * Authentication and request validation land in Phase 2 (#71), so for now every
- * endpoint answers as though the caller were authorised.
+ * Built as an `OpenAPIHono` via {@link createRouter} so request validation
+ * derives from the contract Zod schemas and rejects malformed input with the
+ * `ErrorResponse` envelope (#71). Routes mirror `openapi.yaml` and currently
+ * return stub payloads (#83); authentication lands with the endpoints.
  */
-export const app = new Hono();
+export const app = createRouter();
 
 app.get('/health', (c) =>
   c.json({ status: 'ok', timestamp: new Date().toISOString() }),

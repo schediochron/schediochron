@@ -1,9 +1,9 @@
-import { Hono } from 'hono';
 import type { TimeEntry } from '@schediochron/core';
+import { createRouter } from '../http.js';
 import { stubCompletedEntry, stubRunningEntry } from '../stub-data.js';
 
 /** `/time-entries` — manual entries and clock-in/clock-out. Stub responses (#83). */
-export const timeEntryRoutes = new Hono();
+export const timeEntryRoutes = createRouter();
 
 const entryWithId = (id: string): TimeEntry => ({ ...stubCompletedEntry, id });
 
