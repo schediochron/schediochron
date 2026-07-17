@@ -15,3 +15,6 @@ export {
   migrateDown,
   migrationStatus,
 } from './migrate.js';
+
+export type { DuplicateUserField } from './user-repository.js';
+export { DuplicateUserError, UserRepository } from './user-repository.js';
