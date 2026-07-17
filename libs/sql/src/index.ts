@@ -6,6 +6,8 @@
 
 export { createSqlClient } from './db.js';
 
+export { TeamSqlRepository, LastAdminError } from './team-repository.js';
+
 export type { Migration, MigrationStatus } from './migrate.js';
 export {
   discoverMigrations,
