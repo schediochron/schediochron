@@ -1,9 +1,9 @@
-import { Hono } from 'hono';
 import type { Team } from '@schediochron/core';
+import { createRouter } from '../http.js';
 import { stubTeam } from '../stub-data.js';
 
 /** `/teams` — team management and membership. Stub responses (#83). */
-export const teamRoutes = new Hono();
+export const teamRoutes = createRouter();
 
 const teamWithId = (id: string): Team => ({ ...stubTeam, id });
 

@@ -1,9 +1,9 @@
-import { Hono } from 'hono';
 import type { AuthResponse } from '@schediochron/core';
+import { createRouter } from '../http.js';
 import { stubTokenPair, stubUser } from '../stub-data.js';
 
 /** `/auth` — authentication and token management. Stub responses (#83). */
-export const authRoutes = new Hono();
+export const authRoutes = createRouter();
 
 const authResponse: AuthResponse = { user: stubUser, ...stubTokenPair };
 

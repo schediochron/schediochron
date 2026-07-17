@@ -1,9 +1,9 @@
-import { Hono } from 'hono';
 import type { User } from '@schediochron/core';
+import { createRouter } from '../http.js';
 import { stubUser } from '../stub-data.js';
 
 /** `/users` — user management. Stub responses (#83). */
-export const userRoutes = new Hono();
+export const userRoutes = createRouter();
 
 // The requested id is echoed back so the stub reflects the path it was reached
 // through; Phase 2 looks the user up instead.
