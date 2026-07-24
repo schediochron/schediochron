@@ -1,15 +1,19 @@
 import type { SQL } from 'bun';
 import type { MiddlewareHandler } from 'hono';
 import type {
+  RefreshTokenRepository,
   TeamRepository,
   TimeEntryRepository,
   UserRepository,
 } from '@schediochron/core';
 import {
+  SqlPasswordCredentialStore,
+  SqlRefreshTokenRepository,
   SqlTimeEntryRepository,
   SqlTeamRepository,
   SqlUserRepository,
   createSqlClient,
+  type PasswordCredentialStore,
 } from '@schediochron/sql';
 
 /**
@@ -28,6 +32,10 @@ export interface Repositories {
   users: UserRepository;
   timeEntries: TimeEntryRepository;
   teams: TeamRepository;
+  /** Server-side refresh-token store — revocation and rotation for auth (#30). */
+  refreshTokens: RefreshTokenRepository;
+  /** Password-hash store, keyed by user id — auth credentials (#30). */
+  credentials: PasswordCredentialStore;
 }
 
 // Type the context variable so `c.get('repositories')` is `Repositories`.
@@ -43,6 +51,8 @@ export function createRepositories(sql: SQL): Repositories {
     users: new SqlUserRepository(sql),
     timeEntries: new SqlTimeEntryRepository(sql),
     teams: new SqlTeamRepository(sql),
+    refreshTokens: new SqlRefreshTokenRepository(sql),
+    credentials: new SqlPasswordCredentialStore(sql),
   };
 }
 

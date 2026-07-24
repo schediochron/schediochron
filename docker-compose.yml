@@ -60,6 +60,8 @@ services:
     environment:
       PORT: '3000'
       DATABASE_URL: ${DATABASE_URL:-postgres://schediochron:schediochron@postgres:5432/schediochron}
+      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET:-change-me-to-a-long-random-secret}
+      REFRESH_TOKEN_TTL_SECONDS: ${REFRESH_TOKEN_TTL_SECONDS:-2592000}
     ports:
       - '${API_PORT:-3000}:3000'
     volumes:

@@ -25,3 +25,8 @@ export type { DuplicateUserField } from './user-repository.js';
 export { DuplicateUserError, SqlUserRepository } from './user-repository.js';
 
 export { SqlTeamRepository, LastAdminError } from './team-repository.js';
+
+export { SqlRefreshTokenRepository } from './refresh-token-repository.js';
+
+export type { PasswordCredentialStore } from './password-credential-store.js';
+export { SqlPasswordCredentialStore } from './password-credential-store.js';

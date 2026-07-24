@@ -19,11 +19,10 @@ describe('GET /health', () => {
  * method fails here rather than in the per-resource shape specs.
  */
 const operations = [
-  { id: 'registerUser', method: 'POST', path: '/auth/register', status: 201 },
-  { id: 'loginUser', method: 'POST', path: '/auth/login', status: 200 },
-  { id: 'refreshToken', method: 'POST', path: '/auth/refresh', status: 200 },
-  { id: 'logoutUser', method: 'POST', path: '/auth/logout', status: 204 },
-
+  // The /auth operations are backed by the database (or, for logout,
+  // authenticated) now, so they no longer return their documented status to
+  // this unauthenticated, DB-less smoke table. Their routing, statuses, and
+  // auth are covered end-to-end in routes/auth.spec.ts.
   { id: 'listUsers', method: 'GET', path: '/users', status: 200 },
   { id: 'getUser', method: 'GET', path: '/users/u-1', status: 200 },
   { id: 'updateUser', method: 'PATCH', path: '/users/u-1', status: 200 },
@@ -86,7 +85,7 @@ const operations = [
 describe('openapi.yaml operations', () => {
   it('covers every documented operation', () => {
     // Guards against an endpoint being dropped from the table along with its route.
-    expect(operations).toHaveLength(23);
+    expect(operations).toHaveLength(19);
   });
 
   for (const { id, method, path, status } of operations) {
@@ -123,7 +122,9 @@ describe('unrouted requests', () => {
   });
 
   it('returns 404 for a method the path does not define', async () => {
-    const res = await app.request('/auth/register', { method: 'DELETE' });
+    // /health is defined for GET only and carries no data middleware, so a
+    // DELETE exercises method-not-defined routing without touching the database.
+    const res = await app.request('/health', { method: 'DELETE' });
 
     expect(res.status).toBe(404);
   });
