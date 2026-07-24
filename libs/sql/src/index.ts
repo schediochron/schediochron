@@ -22,6 +22,6 @@ export {
 } from './time-entry-repository.js';
 
 export type { DuplicateUserField } from './user-repository.js';
-export { DuplicateUserError, UserRepository } from './user-repository.js';
+export { DuplicateUserError, SqlUserRepository } from './user-repository.js';
 
-export { TeamSqlRepository, LastAdminError } from './team-repository.js';
+export { SqlTeamRepository, LastAdminError } from './team-repository.js';

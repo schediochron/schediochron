@@ -111,7 +111,7 @@ function rethrow(err: unknown): never {
  * the auth layer (#29/#30) owns credentials. `create` works precisely because
  * the hash is not this repository's concern.
  */
-export class UserRepository implements UserRepositoryContract {
+export class SqlUserRepository implements UserRepositoryContract {
   constructor(private readonly sql: SQL) {}
 
   async findById(id: string): Promise<User | null> {

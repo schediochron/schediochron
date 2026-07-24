@@ -105,7 +105,7 @@ export function mapTeamRow(row: TeamRow): Team {
  * transaction so ADR-004's invariants — `adminIds ⊆ memberIds`, at least one
  * admin — hold atomically; none is a read-modify-write of the whole team.
  */
-export class TeamSqlRepository implements TeamRepository {
+export class SqlTeamRepository implements TeamRepository {
   constructor(private readonly sql: SQL) {}
 
   async findById(id: string): Promise<Team | null> {
