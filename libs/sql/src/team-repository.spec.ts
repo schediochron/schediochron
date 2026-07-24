@@ -5,7 +5,7 @@ import { createSqlClient } from './db.js';
 import { migrateUp } from './migrate.js';
 import {
   LastAdminError,
-  TeamSqlRepository,
+  SqlTeamRepository,
   mapTeamRow,
 } from './team-repository.js';
 
@@ -77,10 +77,10 @@ describe('LastAdminError', () => {
 // --- Database-backed: skipped without a live PostgreSQL (no Docker here) -------
 
 describe.skipIf(!process.env.DATABASE_URL)(
-  'TeamSqlRepository (postgres)',
+  'SqlTeamRepository (postgres)',
   () => {
     let sql: SQL;
-    let repo: TeamSqlRepository;
+    let repo: SqlTeamRepository;
 
     // Four users the tests draw members from; team_members.user_id is a FK to users.
     const [alice, bob, carol, dave] = [
@@ -117,7 +117,7 @@ describe.skipIf(!process.env.DATABASE_URL)(
         VALUES (${id}, ${'u' + id.slice(0, 8)}, 'member')
         ON CONFLICT (id) DO NOTHING`;
       }
-      repo = new TeamSqlRepository(sql);
+      repo = new SqlTeamRepository(sql);
     });
 
     afterAll(async () => {

@@ -4,7 +4,7 @@ import type { SQL } from 'bun';
 import type { User } from '@schediochron/core';
 import { createSqlClient } from './db.js';
 import { migrateUp } from './migrate.js';
-import { DuplicateUserError, UserRepository } from './user-repository.js';
+import { DuplicateUserError, SqlUserRepository } from './user-repository.js';
 
 // A well-formed User with sensible defaults; override per test.
 function makeUser(overrides: Partial<User> = {}): User {
@@ -42,110 +42,115 @@ describe('DuplicateUserError', () => {
 
 // DB-backed round-trips. There is no live PostgreSQL in CI/dev here, so these
 // skip unless DATABASE_URL points at a disposable database.
-describe.skipIf(!process.env.DATABASE_URL)('UserRepository (PostgreSQL)', () => {
-  let sql: SQL;
-  let repo: UserRepository;
+describe.skipIf(!process.env.DATABASE_URL)(
+  'SqlUserRepository (PostgreSQL)',
+  () => {
+    let sql: SQL;
+    let repo: SqlUserRepository;
 
-  beforeAll(async () => {
-    sql = createSqlClient();
-    await migrateUp(sql);
-    repo = new UserRepository(sql);
-  });
-
-  afterAll(async () => {
-    await sql?.close();
-  });
-
-  it('creates a user and reads it back by id and by username', async () => {
-    const user = makeUser();
-    const created = await repo.create(user);
-
-    expect(created.id).toBe(user.id);
-    expect(created.username).toBe(user.username);
-    expect(created.displayName).toBe(user.displayName);
-    expect(created.email).toBe(user.email);
-    expect(created.role).toBe('member');
-    // Timestamps are set by the persistence layer and are ISO 8601 UTC.
-    expect(created.createdAt).toMatch(/Z$/);
-    expect(created.updatedAt).toMatch(/Z$/);
-    expect(new Date(created.createdAt).toISOString()).toBe(created.createdAt);
-
-    expect(await repo.findById(user.id)).toEqual(created);
-    expect(await repo.findByUsername(user.username)).toEqual(created);
-  });
-
-  it('returns null for an unknown id or username', async () => {
-    expect(await repo.findById(randomUUID())).toBeNull();
-    expect(await repo.findByUsername(`missing_${randomUUID().slice(0, 8)}`)).toBeNull();
-  });
-
-  it('maps null displayName and email to null (never empty string)', async () => {
-    const user = makeUser({ displayName: null, email: null });
-    const created = await repo.create(user);
-
-    expect(created.displayName).toBeNull();
-    expect(created.email).toBeNull();
-
-    const fetched = await repo.findById(user.id);
-    expect(fetched?.displayName).toBeNull();
-    expect(fetched?.email).toBeNull();
-  });
-
-  it('update refreshes updatedAt and persists mutable fields', async () => {
-    const created = await repo.create(makeUser({ role: 'member' }));
-    // Ensure the clock advances so updatedAt is observably newer.
-    await new Promise((resolve) => setTimeout(resolve, 5));
-
-    const updated = await repo.update({
-      ...created,
-      displayName: 'Grace Hopper',
-      email: null,
-      role: 'admin',
+    beforeAll(async () => {
+      sql = createSqlClient();
+      await migrateUp(sql);
+      repo = new SqlUserRepository(sql);
     });
 
-    expect(updated.displayName).toBe('Grace Hopper');
-    expect(updated.email).toBeNull();
-    expect(updated.role).toBe('admin');
-    expect(updated.createdAt).toBe(created.createdAt);
-    expect(new Date(updated.updatedAt).getTime()).toBeGreaterThan(
-      new Date(created.updatedAt).getTime(),
-    );
-  });
+    afterAll(async () => {
+      await sql?.close();
+    });
 
-  it('delete removes the row; deleting an unknown id is a no-op', async () => {
-    const created = await repo.create(makeUser());
-    await repo.delete(created.id);
-    expect(await repo.findById(created.id)).toBeNull();
+    it('creates a user and reads it back by id and by username', async () => {
+      const user = makeUser();
+      const created = await repo.create(user);
 
-    // No throw, no effect.
-    await repo.delete(randomUUID());
-  });
+      expect(created.id).toBe(user.id);
+      expect(created.username).toBe(user.username);
+      expect(created.displayName).toBe(user.displayName);
+      expect(created.email).toBe(user.email);
+      expect(created.role).toBe('member');
+      // Timestamps are set by the persistence layer and are ISO 8601 UTC.
+      expect(created.createdAt).toMatch(/Z$/);
+      expect(created.updatedAt).toMatch(/Z$/);
+      expect(new Date(created.createdAt).toISOString()).toBe(created.createdAt);
 
-  it('raises DuplicateUserError on a duplicate username', async () => {
-    const first = await repo.create(makeUser());
-    const clash = makeUser({ username: first.username });
+      expect(await repo.findById(user.id)).toEqual(created);
+      expect(await repo.findByUsername(user.username)).toEqual(created);
+    });
 
-    let caught: unknown;
-    try {
-      await repo.create(clash);
-    } catch (err) {
-      caught = err;
-    }
-    expect(caught).toBeInstanceOf(DuplicateUserError);
-    expect((caught as DuplicateUserError).field).toBe('username');
-  });
+    it('returns null for an unknown id or username', async () => {
+      expect(await repo.findById(randomUUID())).toBeNull();
+      expect(
+        await repo.findByUsername(`missing_${randomUUID().slice(0, 8)}`),
+      ).toBeNull();
+    });
 
-  it('raises DuplicateUserError on a duplicate email', async () => {
-    const first = await repo.create(makeUser());
-    const clash = makeUser({ email: first.email });
+    it('maps null displayName and email to null (never empty string)', async () => {
+      const user = makeUser({ displayName: null, email: null });
+      const created = await repo.create(user);
 
-    let caught: unknown;
-    try {
-      await repo.create(clash);
-    } catch (err) {
-      caught = err;
-    }
-    expect(caught).toBeInstanceOf(DuplicateUserError);
-    expect((caught as DuplicateUserError).field).toBe('email');
-  });
-});
+      expect(created.displayName).toBeNull();
+      expect(created.email).toBeNull();
+
+      const fetched = await repo.findById(user.id);
+      expect(fetched?.displayName).toBeNull();
+      expect(fetched?.email).toBeNull();
+    });
+
+    it('update refreshes updatedAt and persists mutable fields', async () => {
+      const created = await repo.create(makeUser({ role: 'member' }));
+      // Ensure the clock advances so updatedAt is observably newer.
+      await new Promise((resolve) => setTimeout(resolve, 5));
+
+      const updated = await repo.update({
+        ...created,
+        displayName: 'Grace Hopper',
+        email: null,
+        role: 'admin',
+      });
+
+      expect(updated.displayName).toBe('Grace Hopper');
+      expect(updated.email).toBeNull();
+      expect(updated.role).toBe('admin');
+      expect(updated.createdAt).toBe(created.createdAt);
+      expect(new Date(updated.updatedAt).getTime()).toBeGreaterThan(
+        new Date(created.updatedAt).getTime(),
+      );
+    });
+
+    it('delete removes the row; deleting an unknown id is a no-op', async () => {
+      const created = await repo.create(makeUser());
+      await repo.delete(created.id);
+      expect(await repo.findById(created.id)).toBeNull();
+
+      // No throw, no effect.
+      await repo.delete(randomUUID());
+    });
+
+    it('raises DuplicateUserError on a duplicate username', async () => {
+      const first = await repo.create(makeUser());
+      const clash = makeUser({ username: first.username });
+
+      let caught: unknown;
+      try {
+        await repo.create(clash);
+      } catch (err) {
+        caught = err;
+      }
+      expect(caught).toBeInstanceOf(DuplicateUserError);
+      expect((caught as DuplicateUserError).field).toBe('username');
+    });
+
+    it('raises DuplicateUserError on a duplicate email', async () => {
+      const first = await repo.create(makeUser());
+      const clash = makeUser({ email: first.email });
+
+      let caught: unknown;
+      try {
+        await repo.create(clash);
+      } catch (err) {
+        caught = err;
+      }
+      expect(caught).toBeInstanceOf(DuplicateUserError);
+      expect((caught as DuplicateUserError).field).toBe('email');
+    });
+  },
+);

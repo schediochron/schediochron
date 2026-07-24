@@ -7,8 +7,8 @@ import type {
 } from '@schediochron/core';
 import {
   SqlTimeEntryRepository,
-  TeamSqlRepository,
-  UserRepository as SqlUserRepository,
+  SqlTeamRepository,
+  SqlUserRepository,
   createSqlClient,
 } from '@schediochron/sql';
 
@@ -42,7 +42,7 @@ export function createRepositories(sql: SQL): Repositories {
   return {
     users: new SqlUserRepository(sql),
     timeEntries: new SqlTimeEntryRepository(sql),
-    teams: new TeamSqlRepository(sql),
+    teams: new SqlTeamRepository(sql),
   };
 }
 
